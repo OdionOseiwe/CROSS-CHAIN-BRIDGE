@@ -5,13 +5,13 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 contract DestinationToken is ERC20, ERC20Burnable {
     address bridge;
-    constructor(address _bridge) ERC20("DChainstackDollars", "D-CHSD") {
+    constructor(address _bridge) ERC20("AvalancheToken", "AT") {
         bridge = _bridge;
     }
     modifier onlyBridge() {
         require(
             bridge == msg.sender,
-            "DChainstackDollars: only the bridge can trigger this method!"
+            "DestinationToken: only the bridge can trigger this method!"
         );
         _;
     }
@@ -25,7 +25,7 @@ contract DestinationToken is ERC20, ERC20Burnable {
 
     }
     // @dev called from the bridge when tokens are received 
-    // on Harmony side
+    // on ETH side
     function burnFrom(address _account, uint256 _amount)
         public
         virtual
