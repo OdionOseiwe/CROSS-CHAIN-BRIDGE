@@ -6,16 +6,16 @@ pragma solidity ^0.8.13;
 
 import {Script, console2} from "forge-std/Script.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import {OriginToken} from "../src/OriginToken.sol";
+import {AxelarGateway} from "../src/AxelarGateway.sol";
 
-contract interactScript is Script {
+contract AxelarGatewayScript is Script {
     function setUp() public {}
 
-    OriginToken constant origintoken = OriginToken(0xb48CE30A5267De8ABa38d2D15901d9db7000BD51);
+    AxelarGateway constant axelarGateway = AxelarGateway(0x204f79852387C0d68f3C78DB0941eEe92457da3d);
 
     function run() external {
         vm.startBroadcast();
-        origintoken.executeBridge("Avalanche",0x0806C90bA14284f8EC1F6aF35aC68928FAa2D811,1 * (10**uint256(18)));
+        axelarGateway.send();
         vm.stopBroadcast();    
     }
 }
