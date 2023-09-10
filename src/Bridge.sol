@@ -4,56 +4,56 @@ pragma solidity ^0.8.13;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract Bridge  {
-    IAxelarGateway public immutable CeloGateway;
-    string public tokenId;
+    IInterChainLinker public immutable AxelarLinker;
+    bytes32 tokenId;
     address public admin;
-    IERC20 OriginTokenAddress;
+    IERC20 tokenAddress;
 
-    constructor(IERC20 _OriginTokenAddress)  {
+    constructor(IERC20 _tokenAddress)  {
         admin = msg.sender;
-        CeloGateway = IAxelarGateway(0xe432150cce91c13a887f7D836923d5597adD8E31);
-        OriginTokenAddress = _OriginTokenAddress;
+        AxelarLinker = IInterChainLinker( 0x7cD2E96f5258BB825ad6FC0D200EDf8C99590d30);
+        tokenAddress = _tokenAddress;
     }
 
-    function setTokenId(string memory _tokenId) public {
+    function setTokenId(bytes32 _tokenId) public {
         require(msg.sender == admin, "Not an admin");
         tokenId = _tokenId;
     }
 
     function requestFreeToken() public {
         uint amount = 1000 * (10 ** 18);
-        OriginTokenAddress.transfer(msg.sender, amount);
+        tokenAddress.transfer(msg.sender, amount);
     }
 
-    function executeBridge(string calldata destinationChain,string memory destinationAddress, string memory symbol , uint256 amountToBridge)  external {
+    function executeBridge(string calldata destinationChain,bytes calldata recipient, uint256 amountToBridge)  external {
         require(amountToBridge > 0, "No request");
-        // if(tokenId = 0) {
+        // if(tokenId == 0) {
         //   revert("Invalid tokenID! please configure and set interchain token and Id first.");
         // }
-        uint bal = OriginTokenAddress.balanceOf(msg.sender);
+        uint bal = tokenAddress.balanceOf(address(this));
         require(bal > 0 && bal >= amountToBridge, "Bridge: Insufficient balance");
 
-        address CeloGatewayAddress = address(CeloGateway);
-        OriginTokenAddress.approve(CeloGatewayAddress, amountToBridge);
-        CeloGateway.sendToken(
+        address AxelarLinkerAddress = address(AxelarLinker);
+        tokenAddress.approve(AxelarLinkerAddress, amountToBridge);
+        AxelarLinker.interchainTransfer(
         destinationChain,
-        destinationAddress,
-        symbol ,
-        amountToBridge
+        recipient,
+        amountToBridge ,
+        abi.encode(address(this))
         );
     }
 }
 
-interface IAxelarGateway {
-    function sendToken(
-        string memory destinationChain,
-        string memory destinationAddress,
-        string memory symbol,
-        uint256 amount
-    ) external;
+interface IInterChainLinker {
+    function interchainTransfer(
+	string calldata destinationChain,
+	bytes calldata recipient,
+	uint256 amount,
+	bytes calldata metadata
+    ) external payable;
 }
 
-///0xB42071eF8901912Cc92A59De04f6d49dd58a88A8 celoTokenAddress
+///0x39ceeD0C9ad02155dF5ed864e294FBaf6B45801a celoTokenAddress
 
-///0x6E309a55761a5E60dfcd7c9A470205101414ecC3 BridgeAddress
+///0xCE1aBEC519F1083AD1E583dDe755c58D19ae4dDF BridgeAddress
 

@@ -10,7 +10,7 @@ contract BridgeScript is Script {
 
     function run() public {
         vm.startBroadcast();
-        Bridge bridge = new Bridge(IERC20(0xB42071eF8901912Cc92A59De04f6d49dd58a88A8));
+        Bridge bridge = new Bridge(IERC20(0xa1094134b869f61C0267e0F46dbAfD0421F14bB1));
         vm.stopBroadcast();    
     }
 }

@@ -9,12 +9,13 @@ contract OriginTokenScript is Script {
 
     function run() public {
         vm.startBroadcast();
-        OriginToken origintoken = new OriginToken("GoerliToken", "GT",  100 * (10**uint256(18)));
+        OriginToken origintoken = new OriginToken("CeloToken", "CT",  100 * (10**uint256(18)));
         vm.stopBroadcast();    
     }
 
     
 }
+
 
 
 
