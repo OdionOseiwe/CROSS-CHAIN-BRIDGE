@@ -17,7 +17,7 @@ contract  OriginToken is ERC20{
         // mint all tokens and send them to the deployer's wallet
         _mint(msg.sender, _initialSupply * (10**uint256(18)));
         admin = msg.sender;
-        AxelarLinker = IInterChainLinker( 0x7cD2E96f5258BB825ad6FC0D200EDf8C99590d30);
+        AxelarLinker = IInterChainLinker( 0xF786e21509A9D50a9aFD033B5940A2b7D872C208);
     }    
 
     function executeBridge(string calldata destinationChain,address recipient, uint256 amountToBridge)  external payable {

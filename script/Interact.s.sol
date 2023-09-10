@@ -11,7 +11,7 @@ import {OriginToken} from "../src/OriginToken.sol";
 contract interactScript is Script {
     function setUp() public {}
 
-    OriginToken constant origintoken = OriginToken(0x6060fD1ce8bB873A1b22353Ac14d214582C59eFf);
+    OriginToken constant origintoken = OriginToken(0xb48CE30A5267De8ABa38d2D15901d9db7000BD51);
 
 
     function run() external {
