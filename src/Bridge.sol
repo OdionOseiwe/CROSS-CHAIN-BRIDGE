@@ -25,7 +25,7 @@ contract Bridge  {
         tokenAddress.transfer(msg.sender, amount);
     }
 
-    function executeBridge(string calldata destinationChain,bytes calldata recipient, uint256 amountToBridge)  external {
+    function executeBridge(string calldata destinationChain,address recipient, uint256 amountToBridge)  external payable {
         require(amountToBridge > 0, "No request");
         // if(tokenId == 0) {
         //   revert("Invalid tokenID! please configure and set interchain token and Id first.");
@@ -35,11 +35,11 @@ contract Bridge  {
 
         address AxelarLinkerAddress = address(AxelarLinker);
         tokenAddress.approve(AxelarLinkerAddress, amountToBridge);
-        AxelarLinker.interchainTransfer(
+        AxelarLinker.interchainTransfer{value: msg.value}(
         destinationChain,
-        recipient,
+        abi.encode(recipient),
         amountToBridge ,
-        abi.encode(address(this))
+        abi.encode('')
         );
     }
 }
