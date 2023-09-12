@@ -3,10 +3,9 @@ pragma solidity ^0.8.13;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-contract  OriginToken is ERC20{
+///@dev OriginToken is deployed on Celo
 
-    IInterChainLinker public immutable AxelarLinker;
-    bytes32 tokenId;
+contract  OriginToken is ERC20{
     address public admin;
 
     constructor(
@@ -17,35 +16,10 @@ contract  OriginToken is ERC20{
         // mint all tokens and send them to the deployer's wallet
         _mint(msg.sender, _initialSupply * (10**uint256(18)));
         admin = msg.sender;
-        AxelarLinker = IInterChainLinker( 0xF786e21509A9D50a9aFD033B5940A2b7D872C208);
-    }    
-
-    function executeBridge(string calldata destinationChain,address recipient, uint256 amountToBridge)  external payable {
-        require(amountToBridge > 0, "No request");
-        // if(tokenId == 0) {
-        //   revert("Invalid tokenID! please configure and set interchain token and Id first.");
-        // }
-        uint bal = balanceOf(msg.sender);
-        require(bal > 0 && bal >= amountToBridge, "Bridge: Insufficient balance");
-
-        address AxelarLinkerAddress = address(AxelarLinker);
-        approve(AxelarLinkerAddress, amountToBridge);
-        AxelarLinker.interchainTransfer{value: msg.value}(
-        destinationChain,
-        abi.encode(recipient),
-        amountToBridge ,
-        abi.encode('')
-        );
     }
+
+    function requestFreeToken() public {
+        uint amount = 1000 * (10 ** 18);
+        transfer(msg.sender, amount);
+    }    
 }
-
-interface IInterChainLinker {
-    function interchainTransfer(
-	string calldata destinationChain,
-	bytes calldata recipient,
-	uint256 amount,
-	bytes calldata metadata
-    ) external payable;
-}
-
-
