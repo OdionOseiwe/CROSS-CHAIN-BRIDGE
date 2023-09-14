@@ -5,7 +5,7 @@
 pragma solidity ^0.8.13;
 
 import {Script, console2} from "forge-std/Script.sol";
-import {Bridge} from "../src/Bridge.sol";
+import {Bridge} from "../src/StandarizedToken/Bridge.sol";
 
 contract BridgeScript is Script {
     function setUp() public {}

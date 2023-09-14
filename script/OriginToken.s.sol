@@ -2,7 +2,7 @@
 pragma solidity ^0.8.13;
 
 import {Script, console2} from "forge-std/Script.sol";
-import {OriginToken} from "../src/OriginToken.sol";
+import {OriginToken} from "../src/StandarizedToken/OriginToken.sol";
 
 contract OriginTokenScript is Script {
     function setUp() public {}
