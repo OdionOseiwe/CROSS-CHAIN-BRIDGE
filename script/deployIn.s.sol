@@ -19,12 +19,6 @@ contract deployInscript is Script {
     }
 }
 
-// forge script script/deployIn.s.sol:deployInscript --rpc-url https://polygon-mumbai.infura.io/v3/e7af8fc766b941c498bc770af5246568 --private-key 09b170d30e02cf22c291dac78a29ee424db3a4b2187535fbe8aa81185b2d3513 --broadcast --verify -vvvv  
-
-
-// 0x343c5a91Df775e59E887A53c940EBE6cb8f91030 celoToken 
-
-// 0x343c5a91Df775e59E887A53c940EBE6cb8f91030 mumbai token
 
 
 
