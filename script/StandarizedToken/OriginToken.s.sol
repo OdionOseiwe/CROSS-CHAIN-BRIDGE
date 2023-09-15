@@ -2,7 +2,7 @@
 pragma solidity ^0.8.13;
 
 import {Script, console2} from "forge-std/Script.sol";
-import {Bridge} from "../src/StandarizedToken/Bridge.sol";
+import {Bridge} from "src/StandarizedToken/bridge.sol";
 
 contract interactScript is Script {
     function setUp() public {}
