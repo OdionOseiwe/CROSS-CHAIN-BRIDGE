@@ -46,6 +46,4 @@ interface IInterchainTransfer{
     
 }
 
-//0x8E595af70Eb6319741F3AF45Bb94EAf5594D4757 celo token
-
 
