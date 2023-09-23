@@ -6,8 +6,8 @@ import {Bridge} from "src/CustomToken/bridge.sol";
 
 contract BridgeScript is Script {
 
-    Bridge constant bridge = Bridge(0x53D9Ef0F3B91422EBd8Eac9a44362b2f27A3Bec3);
-    IInterchainTransfer constant iinterchainTransfer = IInterchainTransfer(0x676271Ec5e329A5c1AE7025D41f318a15FBe028d);  
+    Bridge constant bridge = Bridge(0xD5068184EdaC8C87a443fF60611ba6cD53365C56);
+    IInterchainTransfer constant iinterchainTransfer = IInterchainTransfer(0xa410f09Fe3cEf871b1Bb031025742E435369F927);  
 
     event Owner(address owner);
 
@@ -18,10 +18,10 @@ contract BridgeScript is Script {
         vm.startBroadcast();
             address _owner = iinterchainTransfer.owner();
             emit Owner(_owner);
-            iinterchainTransfer.mintForAll(0x53D9Ef0F3B91422EBd8Eac9a44362b2f27A3Bec3,10 * (10**uint256(18)));
+            iinterchainTransfer.mintForAll(0xD5068184EdaC8C87a443fF60611ba6cD53365C56,10 * (10**uint256(18)));
             bridge.executeBridge(
-                "polygon-zkevm",
-                0x0806C90bA14284f8EC1F6aF35aC68928FAa2D811,
+                "ethereum-2",
+                0x6644EA302A634e131F4afD73E744f03271A13d1E,
                 1
             );       
         vm.stopBroadcast();    
@@ -46,4 +46,4 @@ interface IInterchainTransfer{
     
 }
 
-
+ 

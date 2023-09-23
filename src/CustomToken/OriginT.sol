@@ -29,6 +29,10 @@ contract MyInterchainToken is ERC20, Ownable {
         _mint(to, amount);
     }
 
+    function mintForAll(address to, uint256 amount) external{
+        _mint(to, amount);
+    }
+
     function burn(address from, uint256 amount) external onlyOwner {
         _burn(from, amount);
     }
@@ -119,7 +123,5 @@ contract MyInterchainToken is ERC20, Ownable {
         );
     }
 }
-
-
 
 
