@@ -4,7 +4,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 
 contract  Bridge{
-    IInterchainTransfer constant iinterchainTransfer = IInterchainTransfer( 0xa410f09Fe3cEf871b1Bb031025742E435369F927);  
+    IInterchainTransfer constant iinterchainTransfer = IInterchainTransfer( 0x5C87196bb352aD470fAAe4b620718f197ef8E745);  
 
     function executeBridge(string calldata destinationChain,address recipient, uint256 amountToBridge)  external payable {
         require(amountToBridge > 0, "No request");
